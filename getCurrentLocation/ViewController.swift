@@ -60,7 +60,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    fun
+    // When displayLocationInfo is called. At this point we have already received a location
+    func displayLocationInfo(placemark: CLPlacemark){
+        //Stops the location manager from getting a new location
+        self.locationManager.stopUpdatingLocation()
+        println(placemark.administrativeArea)
+        println(placemark.country)
+        println(placemark.locality)
+        println(placemark.postalCode)
+        //... and many more
+    }
 
 }
 
