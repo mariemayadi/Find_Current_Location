@@ -67,11 +67,58 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func displayLocationInfo(placemark: CLPlacemark){
         //Stops the location manager from getting a new location
         self.locationManager.stopUpdatingLocation()
+        println("administrativeArea:")
         println(placemark.administrativeArea)
+        println("country:")
         println(placemark.country)
+        println("locality:")
         println(placemark.locality)
+        println("postalCode:")
         println(placemark.postalCode)
-        //... and many more
+        
+        println("location:")
+        println(placemark.location)
+        println()
+        
+        
+        var pmLocation = placemark.location.description
+        
+        //GETTING THE LONGITUDE
+        var longitudeStart = 1
+        var longitudeEnd = 0
+        
+        
+        var start = longitudeStart
+        var end = start + 1
+        var currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
+        while currentChar != "," {
+            start++
+            end++
+            currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
+            longitudeEnd++
+        }
+        var longitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, longitudeStart), end: advance(pmLocation.startIndex, longitudeEnd+1)))
+        println("Longitude "+longitude)
+        
+        //GETTING THE LONGITUDE
+        var latitudeStart = longitudeEnd + 2
+        var latitudeEnd = latitudeStart
+        
+        start = latitudeStart
+        end = start + 1
+        currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
+        while currentChar != ">" {
+            start++
+            end++
+            currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
+            latitudeEnd++
+        }
+        var latitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, latitudeStart), end: advance(pmLocation.startIndex, latitudeEnd)))
+        println("Latitude "+latitude)
+
+        
+        
+        
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
