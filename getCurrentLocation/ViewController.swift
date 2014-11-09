@@ -83,38 +83,38 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         var pmLocation = placemark.location.description
         
-        //GETTING THE LONGITUDE
-        var longitudeStart = 1
-        var longitudeEnd = 0
+        //GETTING THE LATITUDE
+        var latitudeStart = 1
+        var latitudeEnd = 0
         
         
-        var start = longitudeStart
+        var start = latitudeStart
         var end = start + 1
         var currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
         while currentChar != "," {
             start++
             end++
             currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
-            longitudeEnd++
+            latitudeEnd++
         }
-        var longitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, longitudeStart), end: advance(pmLocation.startIndex, longitudeEnd+1)))
-        println("Longitude "+longitude)
+        var latitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, latitudeStart), end: advance(pmLocation.startIndex, latitudeEnd+1)))
+        println("Latitude "+latitude)
         
         //GETTING THE LONGITUDE
-        var latitudeStart = longitudeEnd + 2
-        var latitudeEnd = latitudeStart
+        var longitudeStart = latitudeEnd + 2
+        var longitudeEnd = longitudeStart
         
-        start = latitudeStart
+        start = longitudeStart
         end = start + 1
         currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
         while currentChar != ">" {
             start++
             end++
             currentChar = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, start), end: advance(pmLocation.startIndex, end)))
-            latitudeEnd++
+            longitudeEnd++
         }
-        var latitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, latitudeStart), end: advance(pmLocation.startIndex, latitudeEnd)))
-        println("Latitude "+latitude)
+        var longitude = pmLocation.substringWithRange(Range<String.Index>(start: advance(pmLocation.startIndex, longitudeStart), end: advance(pmLocation.startIndex, longitudeEnd)))
+        println("Longitude "+longitude)
 
         
         
