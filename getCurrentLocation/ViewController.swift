@@ -35,6 +35,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        //NOTE:
+        //The CLGeocoder class provides services for converting between a coordinate (specified as a latitude and longitude) and the user-friendly representation of that coordinate.
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler:{(placemarks, error) -> Void in
+            
+            if (error != nil){
+                println("Error:" + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                //NOTE:
+                //A CLPlacemark object stores placemark data for a given latitude and longitude. Placemark data includes information such as the country, state, city, and street address associated with the specified coordinate
+                let pm = placemarks[0] as CLPlacemark
+                self.displayLocationInfo(pm)
+                
+            } else {
+                println("Error with data")
+            }
+            
+        })
+    }
+    
+    fun
 
 }
 
