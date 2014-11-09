@@ -42,6 +42,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //The CLGeocoder class provides services for converting between a coordinate (specified as a latitude and longitude) and the user-friendly representation of that coordinate.
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler:{(placemarks, error) -> Void in
             
+            //Takes the coordinates that the locationManager outputs and send that info to the Apple server.
+            //The Apple servers take those coordinates, creates and address and sends them back to the application
+            
             if (error != nil){
                 println("Error:" + error.localizedDescription)
                 return
@@ -70,6 +73,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         println(placemark.postalCode)
         //... and many more
     }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println("Error:" + error.localizedDescription)
+    }
+    
 
 }
 
